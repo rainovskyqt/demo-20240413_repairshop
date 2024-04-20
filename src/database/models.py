@@ -5,26 +5,16 @@ class User:
         self._post = post
         self._post_name = post_name
 
-    @property
-    def id(self):
-        return self._id
 
-    @property
-    def name(self):
-        return self._name
-
-    @name.setter
-    def name(self, new_name):
-        self._name = new_name
-
-    @property
-    def post(self):
-        return self._post
-
-    @post.setter
-    def post(self, new_post):
-        self._post = new_post
-
-    @property
-    def post_name(self):
-        return self._post_name
+class Order:
+    def __init__(self, add_date, resolve_date, equipment_id, fault_id,
+                 description, client_id, status_id, worker_id, base_id = 0):
+        self.add_date = add_date
+        self.resolve_date = resolve_date
+        self.equipment_id = equipment_id
+        self.fault_id = fault_id
+        self.description = description
+        self.client_id = client_id
+        self.status_id = status_id
+        self.worker_id = worker_id
+        self.base_id = base_id

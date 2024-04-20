@@ -2,6 +2,7 @@ from PySide6.QtSql import QSqlQuery
 from .db_namager import DBManager
 from .models import User
 
+
 class QueryManager:
     def __init__(self, database: DBManager):
         self.base = database
@@ -46,3 +47,7 @@ class QueryManager:
                               answer.value("post_id"),
                               answer.value("post_name")))
         return users
+
+    def delete_order(self, order_id: int):
+        query_string = "DELETE FROM orders WHERE id = :id"
+        self.execute_query(query_string, {":id": order_id})

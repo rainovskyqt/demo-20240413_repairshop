@@ -14,4 +14,4 @@ class UserList(QDialog):
     def load_users(self):
         users = self.query.get_users()
         for user in users:
-            row = self.ui.tw_user_list.inse
+            pass

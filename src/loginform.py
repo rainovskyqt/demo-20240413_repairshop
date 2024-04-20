@@ -4,7 +4,7 @@ from database.db_namager import DBManager
 from settings import DB_PATH, TABLE_SCRIPT_PATH, DATA_SCRIPT_PATH
 from database.query_manager import QueryManager
 from database.models import User
-from mainwindow import MainWindow
+from .mainwindow import MainWindow
 
 
 class LoginForm(QDialog):
@@ -44,7 +44,7 @@ class LoginForm(QDialog):
         QMessageBox.critical(self, "Неудача", "Неверный логин или пароль")
 
     def start_main_window(self, user: User):
-        self.main_window = MainWindow(user)
+        self.main_window = MainWindow(user, self)
         self.main_window.show()
         self.close()
 
