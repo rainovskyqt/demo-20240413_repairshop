@@ -1,6 +1,6 @@
 from PySide6.QtSql import QSqlQuery
 from .db_namager import DBManager
-from .models import User
+from .models import User, Order, Dictionary
 
 
 class QueryManager:
@@ -51,3 +51,40 @@ class QueryManager:
     def delete_order(self, order_id: int):
         query_string = "DELETE FROM orders WHERE id = :id"
         self.execute_query(query_string, {":id": order_id})
+
+    def get_order(self, order_id: int):
+        query_string = """ SELECT add_date, resolve_date, equipment_id, fault_id, description, client_id, 
+        status_id, worker_id
+        FROM orders
+        WHERE id = :order_id
+        """
+        answer = self.execute_query(query_string, {":order_id": order_id})
+        if answer.next():
+            order = Order(
+                answer.value("add_date"),
+                answer.value("resolve_date"),
+                answer.value("equipment_id"),
+                answer.value("fault_id"),
+                answer.value("description"),
+                answer.value("client_id"),
+                answer.value("status_id"),
+                answer.value("worker_id")
+            )
+            return order
+        else:
+            return 0
+
+    def get_dictionary(self, table: str):
+        query_string = f"SELECT id, mane FROM {table}"
+        answer = self.execute_query(query_string)
+        if answer.next():
+            return Dictionary(answer.value("id"), answer.value("name"))
+
+    def get_equipment(self):
+        return self.get_dictionary("equipment")
+
+    def get_fault(self):
+        return self.get_dictionary("fault")
+
+    def get_status(self):
+        return self.get_dictionary("status")

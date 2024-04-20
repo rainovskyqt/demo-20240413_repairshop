@@ -7,8 +7,8 @@ class User:
 
 
 class Order:
-    def __init__(self, add_date, resolve_date, equipment_id, fault_id,
-                 description, client_id, status_id, worker_id, base_id = 0):
+    def __init__(self, add_date, resolve_date="", equipment_id=0, fault_id=0,
+                 description="", client_id=0, status_id=1, worker_id=0, base_id=0):
         self.add_date = add_date
         self.resolve_date = resolve_date
         self.equipment_id = equipment_id
@@ -18,3 +18,9 @@ class Order:
         self.status_id = status_id
         self.worker_id = worker_id
         self.base_id = base_id
+
+
+class Dictionary:
+    def __init__(self, base_id: int, name: str):
+        self.base_id = base_id
+        self.name = name

@@ -14,7 +14,6 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.user = user
         self.login_form = login_form
-        self
         '''
          При создании базы данных она создается одна на всю программу, но их может быть несколько, таким образом 
          мы получаем ссылку на глобальную базу, если в скобках указать имя подключения, то ссылка создастся на ту базу,
@@ -29,6 +28,7 @@ class MainWindow(QMainWindow):
         self.init_connections()
         self.set_table()
         self.select_orders()
+        self.order_editor = EditOrder(1, self.query_manager)
 
     def exit(self):
         self.login_form.show()
@@ -68,6 +68,10 @@ class MainWindow(QMainWindow):
         rec_id = self.get_current_record_id()
         if not rec_id:
             return
+        print(f" Editable order id = {rec_id}")
+        # editor = EditOrder(rec_id, self.query_manager)
+        # editor.show()
+        self.order_editor.show()
 
     def get_current_record_id(self):
         if not self.ui.tv_orders.selectedIndexes()[0]:
